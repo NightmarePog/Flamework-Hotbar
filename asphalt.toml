@@ -1,0 +1,13 @@
+asset_dir = "assets"
+exclude_assets = []
+write_dir = "src/shared"
+
+[creator]
+type = "group"
+id = 5382451
+
+[codegen]
+output_name = "images"
+typescript = true
+style = "flat"
+strip_extension = false
