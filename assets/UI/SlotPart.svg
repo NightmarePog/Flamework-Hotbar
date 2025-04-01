@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
-   sodipodi:docname="drawing.svg"
+   sodipodi:docname="SlotPart.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@
      transform="translate(0,-87.000028)">
     <path
        id="path11"
-       style="fill:none;stroke:#000000;stroke-width:55.3266;stroke-dasharray:none"
+       style="fill:none;stroke:#e5e5e5;stroke-width:55.3266;stroke-dasharray:none;stroke-opacity:1"
        d="m 27.663315,297 v 0 C 27.663315,195.98549 108.98547,114.66333 210,114.66333" />
   </g>
 </svg>
