@@ -1,6 +1,6 @@
 import React from "@rbxts/react";
 import { createPortal } from "@rbxts/react-roblox";
-import { Slot } from "./Slot";
+import { SlotTab } from "./components/SlotTab";
 
 const player = game.GetService("Players").LocalPlayer;
 const playerGui = player?.FindFirstChildOfClass("PlayerGui");
@@ -11,9 +11,8 @@ export function App() {
 		return undefined;
 	}
 
-	// Vytvoření ScreenGui a přidání do PlayerGui
 	const screenGui = new Instance("ScreenGui");
 	screenGui.Parent = playerGui;
 
-	return createPortal(<Slot />, screenGui); // Vložení do ScreenGui
+	return createPortal(<SlotTab MakeSlots={3} />, screenGui);
 }
