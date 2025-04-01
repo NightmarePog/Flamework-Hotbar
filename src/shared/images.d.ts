@@ -1,4 +1,5 @@
 declare const images: {
-	"image.png": "rbxassetid://138589176635799";
+	"SlotPart.png": "rbxassetid://94212243947466";
+	"UI/SlotPart.svg": "rbxassetid://126048963171461";
 };
 export = images;

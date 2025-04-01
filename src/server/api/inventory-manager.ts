@@ -85,3 +85,5 @@ class Item {
 		};
 	}
 }
+
+print("Inventory manager initalized");

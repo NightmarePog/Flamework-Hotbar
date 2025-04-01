@@ -1,3 +1,7 @@
-[entries."assets/image.png"]
-hash = "f6b3e365de90279ae6d8ffeeeadddd2a85c56a0d8e298798c929e4a6d2a131b5"
-asset_id = 138589176635799
+[entries."assets/SlotPart.png"]
+hash = "26dac6a6852d817732267d6ee397290d438e472fd5149c6e8b77adbfa1d5c67a"
+asset_id = 94212243947466
+
+[entries."assets/UI/SlotPart.svg"]
+hash = "7175bf71e64e6abfa9b964c10d03a4a72197cec5f30bde8e0d8e4b69375400a9"
+asset_id = 126048963171461

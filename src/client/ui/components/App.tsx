@@ -1,6 +1,6 @@
 import React from "@rbxts/react";
 import { createPortal } from "@rbxts/react-roblox";
-import { TestComponent } from "./TestComponent";
+import { Slot } from "./Slot";
 
 const player = game.GetService("Players").LocalPlayer;
 const playerGui = player?.FindFirstChildOfClass("PlayerGui");
@@ -15,5 +15,5 @@ export function App() {
 	const screenGui = new Instance("ScreenGui");
 	screenGui.Parent = playerGui;
 
-	return createPortal(<TestComponent />, screenGui); // Vložení do ScreenGui
+	return createPortal(<Slot />, screenGui); // Vložení do ScreenGui
 }
