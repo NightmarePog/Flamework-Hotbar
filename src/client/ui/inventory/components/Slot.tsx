@@ -14,13 +14,12 @@ export function Slot({ open }: SlotProps) {
 	const innerFrameRef = useRef<Frame>();
 	const currentTween = useRef<Tween>();
 	const prevOpenRef = useRef<boolean | undefined>();
-	const initialOpen = useRef(open); // Zachytává počáteční stav
+	const initialOpen = useRef(open);
 
 	useEffect(() => {
 		const innerFrame = innerFrameRef.current;
 		if (!innerFrame) return;
 
-		// Pokud se stav nezměnil, nic nedělej
 		if (prevOpenRef.current === open) return;
 
 		const isInitial = prevOpenRef.current === undefined;
