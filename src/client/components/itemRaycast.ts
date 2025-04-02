@@ -1,3 +1,5 @@
+// Created by Nightmarepogg
+// Component for raycasting for items
 import { Players, UserInputService, Workspace, RunService } from "@rbxts/services";
 import Signal from "@rbxts/signal";
 
@@ -16,7 +18,7 @@ class DebugLaser {
 			this.laser.Anchored = true;
 			this.laser.CanCollide = false;
 			this.laser.Size = new Vector3(0.05, 0.05, distance);
-			this.laser.Color = new Color3(0, 1, 0); // Zelená
+			this.laser.Color = new Color3(0, 1, 0);
 			this.laser.Material = Enum.Material.Neon;
 			this.laser.Transparency = 0.7;
 
@@ -65,7 +67,7 @@ export class RaycastHandler {
 	private camera = Workspace.CurrentCamera!;
 	private debugLaser: DebugLaser;
 	private instanceHighlighter: InstanceHighlighter;
-	public onItemHit: Signal<(hitInstance: Instance) => void>; // Event pro oznámení, že jsme zasáhli objekt s atributem Item: bool true
+	public onItemHit: Signal<(hitInstance: Instance) => void>;
 
 	constructor(debug: boolean) {
 		this.debugLaser = new DebugLaser(debug);
@@ -81,7 +83,7 @@ export class RaycastHandler {
 			const ray = this.camera.ViewportPointToRay(mousePos.X, mousePos.Y);
 
 			const raycastParams = new RaycastParams();
-			raycastParams.FilterDescendantsInstances = [this.player.Character!]; // Zajištění, že raycast ignoruje vlastní postavu
+			raycastParams.FilterDescendantsInstances = [this.player.Character!];
 			raycastParams.FilterType = Enum.RaycastFilterType.Exclude;
 
 			const raycastResult = Workspace.Raycast(ray.Origin, ray.Direction.mul(1000), raycastParams);
@@ -90,26 +92,7 @@ export class RaycastHandler {
 				this.debugLaser.update(ray.Origin, raycastResult.Position);
 				this.instanceHighlighter.highlight(raycastResult.Instance);
 				this.instance = raycastResult.Instance;
-
-				// Kontrola atributu Item
-				const itemAttribute = raycastResult.Instance.GetAttribute("Item");
-				if (itemAttribute === true) {
-					// Pokud má atribut Item nastavený na true
-					this.onItemHit.Fire(raycastResult.Instance); // Vyvolání eventu
-				}
-			} else {
-				this.debugLaser.update(ray.Origin, ray.Origin.add(ray.Direction.mul(1000)));
-				this.instanceHighlighter.highlight(undefined);
-			}
-		});
-
-		// Detekce stisknutí levého tlačítka myši (LBM)
-		UserInputService.InputBegan.Connect((input, gameProcessed) => {
-			if (gameProcessed) return; // Pokud je vstup již zpracován, ignorujeme ho (např. v případě chatu)
-
-			if (input.UserInputType === Enum.UserInputType.MouseButton1) {
-				// LBM = MouseButton1
-				// print byl odstraněn, aby nebyl výstup do konzole při kliknutí
+				this.onItemHit.Fire(raycastResult.Instance);
 			}
 		});
 

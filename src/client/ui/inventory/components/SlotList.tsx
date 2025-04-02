@@ -1,3 +1,6 @@
+// Created by Nightmarepogg
+// Component for handling multiple slots in row
+
 import React from "@rbxts/react";
 import { Slot } from "./Slot";
 

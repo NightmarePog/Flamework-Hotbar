@@ -1,3 +1,6 @@
+// Created by Nightmarepogg
+// Component for a single slot
+
 import React, { useEffect, useRef } from "@rbxts/react";
 import images from "shared/images";
 

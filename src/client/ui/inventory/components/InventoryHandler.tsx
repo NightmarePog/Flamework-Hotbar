@@ -1,3 +1,6 @@
+// Created by Nightmarepogg
+// Component for handling inventory input
+
 import React from "@rbxts/react";
 import { UserInputService } from "@rbxts/services";
 import { SlotList } from "./SlotList";

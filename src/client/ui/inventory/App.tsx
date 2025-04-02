@@ -1,3 +1,6 @@
+// Created by Nightmarepogg
+// Wrapper Component for all UI
+
 import React from "@rbxts/react";
 import { InventoryHandler } from "./components/InventoryHandler";
 import { PickupDot } from "./components/PickupDot";

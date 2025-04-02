@@ -1,3 +1,6 @@
+// Created by Nightmarepogg
+// Main UI component
+
 import React, { StrictMode } from "@rbxts/react";
 import { createRoot } from "@rbxts/react-roblox";
 import { App } from "./App";
