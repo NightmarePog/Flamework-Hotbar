@@ -72,8 +72,7 @@ export class RaycastHandler {
 	constructor(debug: boolean) {
 		this.debugLaser = new DebugLaser(debug);
 		this.instanceHighlighter = new InstanceHighlighter(debug);
-		this.onItemHit = new Signal(); // Inicializace eventu
-
+		this.onItemHit = new Signal();
 		this.initialize();
 	}
 
