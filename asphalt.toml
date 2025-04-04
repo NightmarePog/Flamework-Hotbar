@@ -6,8 +6,12 @@ write_dir = "src/shared"
 type = "group"
 id = 5382451
 
+[inputs.assets]
+path = "assets/**/*"
+output_path = "src/shared"
+
 [codegen]
-output_name = "images"
+output_name = "assets"
 typescript = true
 style = "flat"
 strip_extension = false

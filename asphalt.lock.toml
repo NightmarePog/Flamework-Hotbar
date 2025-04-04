@@ -1,7 +1,3 @@
-[entries."assets/SlotPart.png"]
-hash = "26dac6a6852d817732267d6ee397290d438e472fd5149c6e8b77adbfa1d5c67a"
-asset_id = 94212243947466
+version = 1
 
-[entries."assets/UI/SlotPart.svg"]
-hash = "fc8f81e166a75f663cb34ddf153ab946523a8a7f94f1d324411873651fb11799"
-asset_id = 84344940381586
+[inputs]

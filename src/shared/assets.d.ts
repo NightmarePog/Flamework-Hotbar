@@ -1,5 +1,5 @@
-declare const images: {
+declare const assets: {
 	"SlotPart.png": "rbxassetid://94212243947466";
 	"UI/SlotPart.svg": "rbxassetid://84344940381586";
 };
-export = images;
+export = assets;

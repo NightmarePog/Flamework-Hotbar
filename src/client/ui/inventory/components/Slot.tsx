@@ -2,7 +2,7 @@
 // Component for a single slot
 
 import React, { useEffect, useRef } from "@rbxts/react";
-import images from "shared/images";
+import images from "shared/assets";
 
 interface SlotProps {
 	open: boolean;
