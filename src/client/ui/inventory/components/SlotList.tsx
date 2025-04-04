@@ -19,9 +19,9 @@ export function SlotList(props: SlotListProps) {
 	}
 
 	return (
-		<>
+		<frame Position={new UDim2(0.5, 0, 0.9, 0)}>
 			<uilistlayout HorizontalAlignment={"Center"} VerticalAlignment={"Bottom"} FillDirection={"Horizontal"} />
 			{slots}
-		</>
+		</frame>
 	);
 }

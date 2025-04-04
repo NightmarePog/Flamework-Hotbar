@@ -10,5 +10,5 @@ class InventoryClient {
 }
 
 class Item {
-	public sprites: string[]; // Pole řetězců (odkazy na obrázky)
+	public sprites: string[] = []; // Pole řetězců (odkazy na obrázky)
 }
