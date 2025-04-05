@@ -1,44 +1,33 @@
-// Created by Nightmarepogg
-// Component for a single slot
-
 import React, { useEffect, useRef } from "@rbxts/react";
-import images from "shared/assets";
+import assets from "shared/assets";
+import { Icon } from "./Icon";
 
 interface SlotProps {
 	open: boolean;
+	img: number;
 }
 
-export function Slot({ open }: SlotProps) {
+export function Slot({ open, img }: SlotProps) {
+	const images = [assets["SlotPart.png"], assets["UI/SlotPart.svg"]];
 	const maxSize = 150;
 	const minSize = 100;
 	const tweenTime = 0.5;
 	const sizeOffset = 30;
+	let Transparency = 1;
 
 	const innerFrameRef = useRef<Frame>();
 	const currentTween = useRef<Tween>();
-	const prevOpenRef = useRef<boolean | undefined>();
-	const initialOpen = useRef(open);
+
+	useEffect(() => {
+		Transparency = 0;
+	}, [img]);
 
 	useEffect(() => {
 		const innerFrame = innerFrameRef.current;
 		if (!innerFrame) return;
 
-		if (prevOpenRef.current === open) return;
-
-		const isInitial = prevOpenRef.current === undefined;
-		prevOpenRef.current = open;
-
-		if (currentTween.current) {
-			currentTween.current.Cancel();
-		}
-
+		currentTween.current?.Cancel();
 		const targetSize = open ? maxSize + sizeOffset : minSize + sizeOffset;
-
-		if (isInitial) {
-			innerFrame.Size = new UDim2(0, targetSize, 0, targetSize);
-			return;
-		}
-
 		const tweenService = game.GetService("TweenService");
 		const tweenInfo = new TweenInfo(tweenTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out);
 		const tween = tweenService.Create(innerFrame, tweenInfo, {
@@ -66,14 +55,7 @@ export function Slot({ open }: SlotProps) {
 		<frame Transparency={1} Size={new UDim2(0, maxSize, 0, maxSize)}>
 			<frame
 				ref={innerFrameRef}
-				Size={
-					new UDim2(
-						0,
-						initialOpen.current ? maxSize + sizeOffset : minSize + sizeOffset,
-						0,
-						initialOpen.current ? maxSize + sizeOffset : minSize + sizeOffset,
-					)
-				}
+				Size={new UDim2(0, minSize + sizeOffset, 0, minSize + sizeOffset)} // Inicializace velikosti na minSize
 				Position={new UDim2(0.5, 0, 0.5, 0)}
 				AnchorPoint={new Vector2(0.5, 0.5)}
 				BackgroundTransparency={1}
@@ -81,13 +63,16 @@ export function Slot({ open }: SlotProps) {
 				{basePositions.map((position, index) => (
 					<imagelabel
 						key={index}
-						Image={images["UI/SlotPart.svg"]}
+						Image={assets["UI/SlotPart.svg"]}
 						Size={new UDim2(0, cornerSize, 0, cornerSize)}
 						Position={position}
 						BackgroundTransparency={1}
 						Rotation={90 * index}
 						ImageColor3={new Color3(229, 229, 229)}
 					/>
+				))}
+				{images.map((imgg, index: number) => (
+					<Icon key={index} Image={imgg} Transparency={index === img ? 0 : 1} />
 				))}
 			</frame>
 		</frame>
