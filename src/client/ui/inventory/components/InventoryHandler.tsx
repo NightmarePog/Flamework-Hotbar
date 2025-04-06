@@ -1,48 +1,28 @@
-// Created by Nightmarepogg
-// Component for handling inventory input
-
-import React from "@rbxts/react";
-import { UserInputService } from "@rbxts/services";
+import React, { useEffect, useState } from "@rbxts/react";
 import { SlotList } from "./SlotList";
-
-const KEY_NUMBER_MAP: { [key: number]: number } = {
-	49: 0, // 1
-	50: 1, // 2
-	51: 2, // 3
-	52: 3, // 4
-	53: 4, // 5
-	54: 5, // 6
-	55: 6, // 7
-	56: 7, // 8
-	57: 8, // 9
-	48: 9, // 0
-};
-
-function useKeyboardSlotSelector(slotCount: number) {
-	const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-	React.useEffect(() => {
-		const handleInput = (input: InputObject) => {
-			if (input.UserInputType !== Enum.UserInputType.Keyboard) return;
-
-			const keyValue = input.KeyCode.Value;
-			const mappedIndex = KEY_NUMBER_MAP[keyValue];
-
-			if (mappedIndex !== undefined && mappedIndex < slotCount) {
-				setSelectedIndex(mappedIndex);
-			}
-		};
-
-		const connection = UserInputService.InputBegan.Connect(handleInput);
-		return () => connection.Disconnect();
-	}, [slotCount]);
-
-	return selectedIndex;
-}
+import { UserInputService } from "@rbxts/services";
 
 export function InventoryHandler() {
-	const slotCount = 4;
-	const selectedIndex = useKeyboardSlotSelector(slotCount);
+	const slotCount = 5;
+	const [selectedIndex, setSelectedIndex] = useState(0);
+	const [iconImg, setIconImg] = useState<number>(0);
 
-	return <SlotList SlotCount={slotCount} SelectedSlot={selectedIndex} />;
+	// ⌨️ Klávesová volba slotu
+	useEffect(() => {
+		const conn = UserInputService.InputBegan.Connect((input) => {
+			if (input.UserInputType === Enum.UserInputType.Keyboard) {
+				const index = input.KeyCode.Value - 49;
+				if (index >= 0 && index < slotCount) {
+					setSelectedIndex(index);
+				}
+			}
+		});
+		return () => conn.Disconnect();
+	}, []);
+
+	return (
+		<frame Size={UDim2.fromScale(1, 1)} BackgroundTransparency={1}>
+			<SlotList SlotCount={slotCount} SelectedSlot={selectedIndex} IconImg={iconImg} />
+		</frame>
+	);
 }

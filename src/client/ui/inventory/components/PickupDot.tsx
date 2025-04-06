@@ -25,10 +25,8 @@ export function PickupDot() {
 	useEffect(() => {
 		const connection = raycastHandler.onItemHit.Connect((hitInstance: Instance) => {
 			if (hitInstance.GetAttribute("Item") === true) {
-				print("big boi");
 				tweenFrameSize(new UDim2(0, 15, 0, 15));
 			} else {
-				print("smol boi");
 				tweenFrameSize(new UDim2(0, 5, 0, 5));
 			}
 		});

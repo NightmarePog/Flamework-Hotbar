@@ -1,44 +1,81 @@
-import React, { useState, useEffect, useRef } from "@rbxts/react";
+import React, { useState, useEffect } from "@rbxts/react";
 import { Slot } from "./Slot";
 import assets from "shared/assets";
 
 interface SlotListProps {
 	SlotCount: number;
 	SelectedSlot: number;
-	IconImg?: IntValue;
+	IconImg?: number;
+}
+
+// 🧱 OOP reprezentace jednoho slotu
+class SlotData {
+	public index: number;
+	public isOpen: boolean;
+	public img: number;
+
+	constructor(index: number, isOpen = false, img = 0) {
+		this.index = index;
+		this.isOpen = isOpen;
+		this.img = img;
+	}
+
+	updateImage(newImg: number) {
+		this.img = newImg;
+	}
+
+	setOpen(state: boolean) {
+		this.isOpen = state;
+	}
 }
 
 export function SlotList(props: SlotListProps) {
-	const [icons, setIcons] = useState<string[]>([]);
-	const slotRefs = useRef([]);
+	const [slots, setSlots] = useState<SlotData[]>([]);
 
+	// Inicializace při změně SlotCount (např. na začátku)
 	useEffect(() => {
-		// pane AI, tady dejte kód, díky moc
-	}, [props.IconImg]);
+		setSlots((prev) => {
+			const newSlots: SlotData[] = [];
 
+			for (let i = 0; i < props.SlotCount; i++) {
+				const existing = prev[i];
+				newSlots.push(new SlotData(i, false, existing ? existing.img : 0));
+			}
+
+			return newSlots;
+		});
+	}, [props.SlotCount]);
+
+	// Přepínání vybraného slotu (jen změna isOpen)
+	useEffect(() => {
+		setSlots((prev) => {
+			return prev.map((slot, i) => {
+				slot.setOpen(i === props.SelectedSlot);
+				return slot;
+			});
+		});
+	}, [props.SelectedSlot]);
+
+	// Update obrázku v daném slotu
 	useEffect(() => {
 		if (typeOf(props.IconImg) === "number" && props.SelectedSlot !== undefined) {
-			setIcons((prevIcons) => {
-				const newIcons = [...prevIcons];
-				newIcons[props.SelectedSlot] = `${props.IconImg}`;
-				return newIcons;
+			setSlots((prevSlots) => {
+				const updated = [...prevSlots];
+				const slot = updated[props.SelectedSlot];
+				if (slot) {
+					slot.updateImage(props.IconImg as number);
+				}
+				return updated;
 			});
 		}
-	}, [props.IconImg, props.SelectedSlot]);
+	}, [props.IconImg]);
 
-	const slots: React.Element[] = [];
-
-	for (let i = 0; i < props.SlotCount; i++) {
-		const isOpen = i === (props.SelectedSlot ?? -1);
-		const icon = icons[i];
-
-		slots.push(<Slot key={i} open={isOpen} img={1} />);
-	}
+	const renderedSlots = slots.map((slot) => <Slot key={slot.index} open={slot.isOpen} img={slot.img} />);
 
 	return (
 		<frame Position={new UDim2(0.5, 0, 0.9, 0)} AnchorPoint={new Vector2(0.5, 0.9)} BackgroundTransparency={1}>
 			<uilistlayout HorizontalAlignment={"Center"} VerticalAlignment={"Bottom"} FillDirection={"Horizontal"} />
-			{slots}
+			{renderedSlots}
 		</frame>
 	);
 }

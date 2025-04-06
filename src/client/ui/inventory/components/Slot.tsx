@@ -8,7 +8,7 @@ interface SlotProps {
 }
 
 export function Slot({ open, img }: SlotProps) {
-	const images = [assets["SlotPart.png"], assets["UI/SlotPart.svg"]];
+	const images = ["0", assets["SlotPart.png"], assets["UI/SlotPart.svg"]];
 	const maxSize = 150;
 	const minSize = 100;
 	const tweenTime = 0.5;
