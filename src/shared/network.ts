@@ -4,7 +4,12 @@ interface ClientToServerEvents {}
 
 interface ServerToClientEvents {}
 
-interface ClientToServerFunctions {}
+interface ClientToServerFunctions {
+	createInventory: () => number;
+	deleteInventory: () => number;
+	requestSlotData: () => [];
+	requestInventoryData: () => [];
+}
 
 interface ServerToClientFunctions {}
 
