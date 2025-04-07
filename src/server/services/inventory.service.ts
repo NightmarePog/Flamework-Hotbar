@@ -2,15 +2,18 @@
 // Inventory-runtime
 import { Service } from "@flamework/core";
 import { Functions } from "server/network";
-import { GlobalFunctions } from "shared/network";
 import { Slot, Item } from "shared/inventory";
 import { items } from "shared/inventoryItems/items";
 const invSlots = 5;
 
+const inventories: Record<number, Inventory | undefined> = {};
+
 class Inventory {
 	private slots: Slot[];
+	public slotCount: number;
 
 	constructor(slotCount: number) {
+		this.slotCount = slotCount;
 		this.slots = [];
 		for (let i = 0; i < slotCount; i++) {
 			this.slots.push(new Slot());
@@ -39,8 +42,25 @@ class Inventory {
 	private update() {
 		print("inventory updated!");
 	}
+
+	public getData() {
+		const result: ReturnType<Slot["getInfo"]>[] = [];
+		for (let index = 0; index < this.slots.size(); index++) {
+			result.push(this.slots[index].getInfo());
+		}
+		return result;
+	}
 }
 
-class InventoryNetwork {}
+Functions.createInventory.setCallback((plr) => {
+	const newInventory = new Inventory(invSlots);
+	inventories[plr.UserId] = newInventory;
+	return newInventory.slotCount;
+});
+
+Functions.deleteInventory.setCallback((plr) => {
+	inventories[plr.UserId] = undefined;
+	return 0;
+});
 
 print("Inventory manager initalized");

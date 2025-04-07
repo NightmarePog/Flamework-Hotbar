@@ -27,6 +27,14 @@ export class Slot {
 			this.item.use();
 		}
 	}
+
+	getInfo() {
+		if (this.item === undefined) {
+			return { undefined };
+		} else {
+			return this.item.getInfo();
+		}
+	}
 }
 
 export class Item {
@@ -43,7 +51,7 @@ export class Item {
 		print(`${this.name} used!`);
 	}
 
-	returnInfo() {
+	getInfo() {
 		return {
 			id: this.id,
 			name: this.name,
