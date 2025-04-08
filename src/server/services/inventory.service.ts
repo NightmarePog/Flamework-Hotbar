@@ -1,5 +1,5 @@
 // Code Created by Nightmarepog
-// Inventory-runtime
+// Inventory-service
 import { Functions } from "server/network";
 import { Slot, Item } from "shared/inventory";
 const slotCount = 5;
@@ -48,6 +48,13 @@ class Inventory {
 		}
 		return result;
 	}
+	public useItem(slotIndex: number) {
+		if (slotIndex >= this.slots.size()) {
+			print("Request for adding item failed: parameter is higher than slot count");
+		} else {
+			this.slots[slotIndex].useItem();
+		}
+	}
 }
 
 Functions.createInventory.setCallback((plr: Player) => {
@@ -86,6 +93,13 @@ Functions.getInventoryInfo.setCallback((plr: Player) => {
 
 Functions.getSlotCount.setCallback((plr: Player) => {
 	return slotCount;
+});
+
+Functions.useItem.setCallback((plr: Player) => {
+	const inventory = inventories[plr.UserId];
+	if (inventory !== undefined) {
+		return undefined;
+	}
 });
 
 print("Inventory manager initalized");
