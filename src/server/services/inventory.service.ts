@@ -1,10 +1,8 @@
 // Code Created by Nightmarepog
 // Inventory-runtime
-import { Service } from "@flamework/core";
 import { Functions } from "server/network";
 import { Slot, Item } from "shared/inventory";
-import { items } from "shared/inventoryItems/items";
-const invSlots = 5;
+const slotCount = 5;
 
 const inventories: Record<number, Inventory | undefined> = {};
 
@@ -52,15 +50,42 @@ class Inventory {
 	}
 }
 
-Functions.createInventory.setCallback((plr) => {
-	const newInventory = new Inventory(invSlots);
+Functions.createInventory.setCallback((plr: Player) => {
+	const newInventory = new Inventory(slotCount);
 	inventories[plr.UserId] = newInventory;
 	return newInventory.slotCount;
 });
 
-Functions.deleteInventory.setCallback((plr) => {
+Functions.deleteInventory.setCallback((plr: Player) => {
 	inventories[plr.UserId] = undefined;
 	return 0;
+});
+
+Functions.addItem.setCallback((plr: Player, slotIndex: number, item: new () => Item) => {
+	const inventory = inventories[plr.UserId];
+	if (inventory !== undefined) {
+		inventory.addItem(slotIndex, new item());
+		return undefined;
+	}
+});
+
+Functions.removeItem.setCallback((plr: Player, slotIndex: number) => {
+	const inventory = inventories[plr.UserId];
+	if (inventory !== undefined) {
+		inventory.removeItem(slotIndex);
+		return undefined;
+	}
+});
+
+Functions.getInventoryInfo.setCallback((plr: Player) => {
+	const inventory = inventories[plr.UserId];
+	if (inventory !== undefined) {
+		return inventory.getData();
+	}
+});
+
+Functions.getSlotCount.setCallback((plr: Player) => {
+	return slotCount;
 });
 
 print("Inventory manager initalized");

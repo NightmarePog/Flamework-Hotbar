@@ -1,5 +1,5 @@
 import { Networking } from "@flamework/networking";
-import { Slot } from "./inventory";
+import { Item, Slot } from "./inventory";
 
 interface ClientToServerEvents {}
 
@@ -10,9 +10,10 @@ interface ServerToClientEvents {
 interface ClientToServerFunctions {
 	createInventory: () => number;
 	deleteInventory: () => number;
-	addItem: (id: number) => undefined;
-	removeItem: (id: number) => undefined;
-	getInventoryInfo: () => ReturnType<Slot["getInfo"]>[];
+	addItem: (slotIndex: number, itemName: new () => Item) => undefined;
+	removeItem: (slotIndex: number) => undefined;
+	getInventoryInfo: () => ReturnType<Slot["getInfo"]>[] | undefined;
+	getSlotCount: () => number;
 }
 
 interface ServerToClientFunctions {}

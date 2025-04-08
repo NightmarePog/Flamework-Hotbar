@@ -1,4 +1,7 @@
-import { Item } from "shared/inventory";
 import { Box } from "./box";
+import { Item } from "shared/inventory";
 
-export const items = [Box];
+export const items: Record<string, typeof Item> = {
+	Item,
+	Box,
+};
