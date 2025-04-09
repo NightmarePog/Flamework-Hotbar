@@ -1,9 +1,10 @@
-import { InputHandle } from "./PickupInputHandling";
+import { InputHandle } from "./InputHandling";
+import { RaycastHandler } from "./itemRaycast";
 import assets from "shared/assets";
 import { Functions } from "client/network";
-import { updateData } from "client/ui/inventory/App";
+import { updateData, getSelectedSlotData } from "client/ui/inventory/App";
 import { Item } from "shared/inventory";
-
+import { InventoryHandler } from "client/ui/inventory/components/InventoryHandler";
 class InventoryClient {
 	constructor() {
 		this.initialize();
@@ -28,4 +29,16 @@ class InventoryClient {
 	}
 }
 
+const Raycast = new RaycastHandler(false);
 const inv = new InventoryClient();
+const inputHandling = new InputHandle();
+
+inputHandling.KeyEPressed.Connect(() => {
+	const RaycastResult = Raycast.FireSingleRaycast();
+	if (RaycastResult !== undefined) {
+		const data = getSelectedSlotData();
+		if (data.iconImg === 0) {
+			inv.PickUp(data.selectedIndex, RaycastResult.Instance.Name());
+		}
+	}
+});

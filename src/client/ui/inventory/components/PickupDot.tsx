@@ -13,7 +13,6 @@ export function PickupDot() {
 	const player = Players.LocalPlayer;
 	const mouse = player.GetMouse();
 
-	// Funkce pro animaci velikosti frame
 	const tweenFrameSize = (newSize: UDim2) => {
 		if (!frameRef.current) return;
 

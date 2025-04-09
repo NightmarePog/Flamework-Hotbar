@@ -100,4 +100,16 @@ export class RaycastHandler {
 			this.instanceHighlighter.destroy();
 		});
 	}
+
+	// Nová funkce pro provedení jednoho raycastu
+	public FireSingleRaycast(): RaycastResult | undefined {
+		const mousePos = UserInputService.GetMouseLocation();
+		const ray = this.camera.ViewportPointToRay(mousePos.X, mousePos.Y);
+
+		const raycastParams = new RaycastParams();
+		raycastParams.FilterDescendantsInstances = [this.player.Character!];
+		raycastParams.FilterType = Enum.RaycastFilterType.Exclude;
+
+		return Workspace.Raycast(ray.Origin, ray.Direction.mul(1000), raycastParams);
+	}
 }

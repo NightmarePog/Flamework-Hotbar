@@ -8,7 +8,6 @@ interface SlotListProps {
 	IconImg?: number;
 }
 
-// 🧱 OOP reprezentace jednoho slotu
 class SlotData {
 	public index: number;
 	public isOpen: boolean;
@@ -32,7 +31,6 @@ class SlotData {
 export function SlotList(props: SlotListProps) {
 	const [slots, setSlots] = useState<SlotData[]>([]);
 
-	// Inicializace při změně SlotCount (např. na začátku)
 	useEffect(() => {
 		setSlots((prev) => {
 			const newSlots: SlotData[] = [];
@@ -46,7 +44,6 @@ export function SlotList(props: SlotListProps) {
 		});
 	}, [props.SlotCount]);
 
-	// Přepínání vybraného slotu (jen změna isOpen)
 	useEffect(() => {
 		setSlots((prev) => {
 			return prev.map((slot, i) => {
@@ -56,7 +53,6 @@ export function SlotList(props: SlotListProps) {
 		});
 	}, [props.SelectedSlot]);
 
-	// Update obrázku v daném slotu
 	useEffect(() => {
 		if (typeOf(props.IconImg) === "number" && props.SelectedSlot !== undefined) {
 			setSlots((prevSlots) => {

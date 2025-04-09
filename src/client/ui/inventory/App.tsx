@@ -36,3 +36,7 @@ export function updateData(newData: Partial<InventoryHandlerData>) {
 		...newData,
 	};
 }
+
+export function getSelectedSlotData() {
+	return props;
+}
