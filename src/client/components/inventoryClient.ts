@@ -3,8 +3,7 @@ import { RaycastHandler } from "./itemRaycast";
 import assets from "shared/assets";
 import { Functions } from "client/network";
 import { updateData, getSelectedSlotData } from "client/ui/inventory/App";
-import { Item } from "shared/inventory";
-import { InventoryHandler } from "client/ui/inventory/components/InventoryHandler";
+import { Item, StringToClass } from "shared/inventory";
 class InventoryClient {
 	constructor() {
 		this.initialize();
@@ -16,8 +15,8 @@ class InventoryClient {
 		updateData({ slotCount });
 	}
 
-	public PickUp(slot: number, Item: new () => Item) {
-		Functions.addItem.invoke(slot, Item);
+	public PickUp(slot: number, Item: new () => Item, Instance: Instance) {
+		Functions.addItem.invoke(slot, Item, Instance);
 	}
 
 	public Drop(slot: number) {
@@ -26,6 +25,11 @@ class InventoryClient {
 
 	public Use(slot: number) {
 		Functions.useItem.invoke(slot);
+	}
+
+	public DeleteInventory() {
+		Functions.deleteInventory();
+		updateData({ slotCount: 0 });
 	}
 }
 
@@ -36,9 +40,20 @@ const inputHandling = new InputHandle();
 inputHandling.KeyEPressed.Connect(() => {
 	const RaycastResult = Raycast.FireSingleRaycast();
 	if (RaycastResult !== undefined) {
-		const data = getSelectedSlotData();
-		if (data.iconImg === 0) {
-			inv.PickUp(data.selectedIndex, RaycastResult.Instance.Name());
+		if (RaycastResult.Instance.GetAttribute("Item") === true) {
+			const data = getSelectedSlotData();
+			if (data.iconImg === 0) {
+				inv.PickUp(data.selectedIndex, StringToClass[RaycastResult.Instance.Name], RaycastResult.Instance);
+			} else if (data.iconImg !== 0) {
+				inv.Drop(data.selectedIndex);
+			}
 		}
+	}
+});
+
+inputHandling.LeftMouseButtonPressed.Connect(() => {
+	const data = getSelectedSlotData();
+	if (data.iconImg !== 0) {
+		inv.Use(data.selectedIndex);
 	}
 });

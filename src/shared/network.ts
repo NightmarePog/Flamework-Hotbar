@@ -10,7 +10,7 @@ interface ServerToClientEvents {
 interface ClientToServerFunctions {
 	createInventory: () => number;
 	deleteInventory: () => number;
-	addItem: (slotIndex: number, item: new () => Item) => undefined;
+	addItem: (slotIndex: number, item: new () => Item, Instance: Instance) => undefined;
 	removeItem: (slotIndex: number) => undefined;
 	getInventoryInfo: () => ReturnType<Slot["getInfo"]>[] | undefined;
 	getSlotCount: () => number;

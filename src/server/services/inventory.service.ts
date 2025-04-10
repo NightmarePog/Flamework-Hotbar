@@ -19,19 +19,37 @@ class Inventory {
 		}
 	}
 
-	addItem(slotIndex: number, item: Item) {
+	addItem(slotIndex: number, item: Item, Instance: Instance) {
 		if (slotIndex >= this.slots.size() || slotIndex < 0) {
 			print("Request for adding item failed: parameter is higher than slot count");
 		} else {
 			this.slots[slotIndex].addItem(item);
+			Instance.Destroy();
 			this.update();
 		}
 	}
 
-	removeItem(slotIndex: number) {
+	removeItem(slotIndex: number, plr: Player) {
 		if (slotIndex >= this.slots.size()) {
 			print("Request for adding item failed: parameter is higher than slot count");
 		} else {
+			const ItemProps = this.slots[slotIndex].getInfo();
+
+			if (ItemProps && "model" in ItemProps && typeIs(ItemProps.model, "Instance")) {
+				const Model: Model = ItemProps.model;
+				const ClonedModel: Model = Model.Clone();
+
+				const playerPosition = plr.Character?.PrimaryPart?.Position;
+
+				if (playerPosition && plr.Character?.PrimaryPart) {
+					const lookVector = plr.Character.PrimaryPart.CFrame.LookVector;
+					const newPosition = playerPosition.add(lookVector.mul(2));
+					let ModelPosition = ClonedModel.PrimaryPart?.Position;
+					ModelPosition = newPosition;
+					// Item will spawn 2 studs in front of the player
+				}
+			}
+
 			this.slots[slotIndex].removeItem();
 			this.update();
 		}
@@ -68,10 +86,10 @@ Functions.deleteInventory.setCallback((plr: Player) => {
 	return 0;
 });
 
-Functions.addItem.setCallback((plr: Player, slotIndex: number, item: new () => Item) => {
+Functions.addItem.setCallback((plr: Player, slotIndex: number, item: new () => Item, instance) => {
 	const inventory = inventories[plr.UserId];
 	if (inventory !== undefined) {
-		inventory.addItem(slotIndex, new item());
+		inventory.addItem(slotIndex, new item(), instance);
 		return undefined;
 	}
 });
@@ -79,7 +97,7 @@ Functions.addItem.setCallback((plr: Player, slotIndex: number, item: new () => I
 Functions.removeItem.setCallback((plr: Player, slotIndex: number) => {
 	const inventory = inventories[plr.UserId];
 	if (inventory !== undefined) {
-		inventory.removeItem(slotIndex);
+		inventory.removeItem(slotIndex, plr);
 		return undefined;
 	}
 });

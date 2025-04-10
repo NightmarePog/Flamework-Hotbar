@@ -1,6 +1,6 @@
 import { items } from "./inventoryItems/items";
 
-const stringToClass: Record<string, new (...args: never[]) => Item> = {
+export const StringToClass: Record<string, new (...args: never[]) => Item> = {
 	box: items["Box"],
 };
 
