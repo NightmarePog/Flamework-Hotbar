@@ -1,4 +1,8 @@
-const stringToClass: Record<string, object> = {}; // TODO STRING TO CLASS DICTIONARY
+import { items } from "./inventoryItems/items";
+
+const stringToClass: Record<string, new (...args: never[]) => Item> = {
+	box: items["Box"],
+};
 
 export class Slot {
 	private item: Item | undefined = undefined;
