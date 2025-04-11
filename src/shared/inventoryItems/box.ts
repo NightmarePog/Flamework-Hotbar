@@ -1,4 +1,4 @@
-import { Item } from "shared/inventory";
+import { Item } from "shared/itemClass";
 import { items } from "./items";
 
 const replicatedStorage = game.GetService("ReplicatedStorage");

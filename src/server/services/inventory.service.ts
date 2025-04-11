@@ -1,7 +1,8 @@
 // Code Created by Nightmarepog
 // Inventory-service
 import { Functions } from "server/network";
-import { Slot, Item } from "shared/inventory";
+import { Slot } from "shared/inventory";
+import { Item } from "shared/itemClass";
 const slotCount = 5;
 
 const inventories: Record<number, Inventory | undefined> = {};

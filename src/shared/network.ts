@@ -1,5 +1,6 @@
 import { Networking } from "@flamework/networking";
-import { Item, Slot } from "./inventory";
+import { Slot } from "./inventory";
+import { Item } from "shared/itemClass";
 
 interface ClientToServerEvents {}
 

@@ -3,7 +3,8 @@ import { RaycastHandler } from "./itemRaycast";
 import assets from "shared/assets";
 import { Functions } from "client/network";
 import { updateData, getSelectedSlotData } from "client/ui/inventory/App";
-import { Item, StringToClass } from "shared/inventory";
+import { StringToClass } from "shared/inventory";
+import { Item } from "shared/itemClass";
 class InventoryClient {
 	constructor() {
 		this.initialize();
