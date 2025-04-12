@@ -2,7 +2,7 @@
 // Cursor Component basically
 
 import React, { useEffect, useRef, useState } from "@rbxts/react";
-import { RaycastHandler } from "client/components/itemRaycast";
+import { RaycastHandler } from "client/events/itemRaycast";
 import { Players, TweenService, RunService, UserInputService } from "@rbxts/services";
 
 export function PickupDot() {

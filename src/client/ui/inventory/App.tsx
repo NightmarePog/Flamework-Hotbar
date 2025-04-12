@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState } from "@rbxts/react";
 import { InventoryHandler } from "./components/InventoryHandler";
-import { PickupDot } from "./components/PickupDot";
+import { PickupDot } from "./components/Cursor/Cursor";
 import { UserInputService } from "@rbxts/services";
 
 interface InventoryHandlerData {
