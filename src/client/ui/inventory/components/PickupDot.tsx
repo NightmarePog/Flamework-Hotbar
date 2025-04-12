@@ -23,10 +23,14 @@ export function PickupDot() {
 
 	useEffect(() => {
 		const connection = raycastHandler.onItemHit.Connect((hitInstance: Instance) => {
-			if (hitInstance.GetAttribute("Item") === true) {
-				tweenFrameSize(new UDim2(0, 15, 0, 15));
-			} else {
-				tweenFrameSize(new UDim2(0, 5, 0, 5));
+			const instanceModel = hitInstance.Parent;
+
+			if (instanceModel && instanceModel.IsA("Model")) {
+				if (instanceModel.GetAttribute("Item") === true) {
+					tweenFrameSize(new UDim2(0, 15, 0, 15));
+				} else {
+					tweenFrameSize(new UDim2(0, 5, 0, 5));
+				}
 			}
 		});
 

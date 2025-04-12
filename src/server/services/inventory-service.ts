@@ -1,8 +1,8 @@
 // Code Created by Nightmarepog
 // Inventory-service
+import { cloneElement } from "@rbxts/react";
 import { Functions } from "server/network";
 import { Slot, StringToClass } from "shared/inventory";
-import { Item } from "shared/itemClass";
 const slotCount = 5;
 
 const inventories: Record<number, Inventory | undefined> = {};
@@ -22,14 +22,15 @@ class Inventory {
 
 	addItem(slotIndex: number, Instance: Instance) {
 		const instanceName: string = Instance.Name;
-		const item = StringToClass[instanceName];
+		const itemClass = StringToClass[instanceName];
 		if (slotIndex >= this.slots.size() || slotIndex < 0) {
 			print("Request for adding item failed: parameter is higher than slot count");
 		} else {
-			this.slots[slotIndex].addItem(new item());
+			this.slots[slotIndex].addItem(itemClass);
 			Instance.Destroy();
 			this.update();
 		}
+		print(this.slots);
 	}
 
 	removeItem(slotIndex: number, plr: Player) {
@@ -37,18 +38,21 @@ class Inventory {
 			print("Request for adding item failed: parameter is higher than slot count");
 		} else {
 			const ItemProps = this.slots[slotIndex].getInfo();
-
-			if (ItemProps && "model" in ItemProps && typeIs(ItemProps.model, "Instance")) {
+			print(this.slots[slotIndex]);
+			if ("model" in ItemProps) {
 				const Model: Model = ItemProps.model;
 				const ClonedModel: Model = Model.Clone();
-
-				const playerPosition = plr.Character?.PrimaryPart?.Position;
-
-				if (playerPosition && plr.Character?.PrimaryPart) {
-					const lookVector = plr.Character.PrimaryPart.CFrame.LookVector;
+				ClonedModel.Parent = game.Workspace;
+				const character = plr.Character;
+				const playerPosition = character?.PrimaryPart?.Position;
+				print("player position:");
+				print(playerPosition);
+				if (playerPosition && character.PrimaryPart) {
+					const lookVector = character.PrimaryPart.CFrame.LookVector;
 					const newPosition = playerPosition.add(lookVector.mul(2));
-					let ModelPosition = ClonedModel.PrimaryPart?.Position;
-					ModelPosition = newPosition;
+					const ModelPosition = ClonedModel.PrimaryPart?.Position;
+					print("primary partt exist ig");
+					ClonedModel.MoveTo(newPosition);
 					// Item will spawn 2 studs in front of the player
 				}
 			}

@@ -8,9 +8,12 @@ export const StringToClass: Record<string, new (...args: never[]) => Item> = {
 export class Slot {
 	private item: Item | undefined = undefined;
 
-	addItem(Item: Item) {
+	addItem(Item: new (...args: never[]) => Item) {
 		if (this.item === undefined) {
-			this.item = Item;
+			this.item = new Item();
+			print(Item);
+			print(new Item());
+			print(this.item);
 			print("Item Added into the slot!");
 		}
 	}

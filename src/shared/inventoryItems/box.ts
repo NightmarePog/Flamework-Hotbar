@@ -2,7 +2,7 @@ import { Item } from "shared/itemClass";
 import { items } from "./items";
 
 const replicatedStorage = game.GetService("ReplicatedStorage");
-const ItemsFolder = replicatedStorage.FindFirstChild("Items");
+const ItemsFolder = replicatedStorage.FindFirstChild("ItemModels");
 
 export class Box extends Item {
 	constructor() {
@@ -19,3 +19,6 @@ export class Box extends Item {
 		print("dumbass, box has no use");
 	}
 }
+
+const test = new Box();
+print(test);
