@@ -2,14 +2,11 @@ import { Item } from "./itemClass";
 import { items } from "./inventoryItems/items";
 
 export const StringToClass: Record<string, new (...args: never[]) => Item> = {
-	box: items["Box"],
+	Box: items["Box"],
 };
 
 export class Slot {
 	private item: Item | undefined = undefined;
-	constructor() {
-		print("slot created!");
-	}
 
 	addItem(Item: Item) {
 		if (this.item === undefined) {

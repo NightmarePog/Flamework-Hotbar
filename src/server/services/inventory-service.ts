@@ -1,7 +1,7 @@
 // Code Created by Nightmarepog
 // Inventory-service
 import { Functions } from "server/network";
-import { Slot } from "shared/inventory";
+import { Slot, StringToClass } from "shared/inventory";
 import { Item } from "shared/itemClass";
 const slotCount = 5;
 
@@ -20,11 +20,13 @@ class Inventory {
 		}
 	}
 
-	addItem(slotIndex: number, item: Item, Instance: Instance) {
+	addItem(slotIndex: number, Instance: Instance) {
+		const instanceName: string = Instance.Name;
+		const item = StringToClass[instanceName];
 		if (slotIndex >= this.slots.size() || slotIndex < 0) {
 			print("Request for adding item failed: parameter is higher than slot count");
 		} else {
-			this.slots[slotIndex].addItem(item);
+			this.slots[slotIndex].addItem(new item());
 			Instance.Destroy();
 			this.update();
 		}
@@ -87,10 +89,10 @@ Functions.deleteInventory.setCallback((plr: Player) => {
 	return 0;
 });
 
-Functions.addItem.setCallback((plr: Player, slotIndex: number, item: new () => Item, instance) => {
+Functions.addItem.setCallback((plr: Player, slotIndex: number, instance) => {
 	const inventory = inventories[plr.UserId];
 	if (inventory !== undefined) {
-		inventory.addItem(slotIndex, new item(), instance);
+		inventory.addItem(slotIndex, instance);
 		return undefined;
 	}
 });
