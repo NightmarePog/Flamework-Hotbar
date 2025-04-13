@@ -5,10 +5,10 @@ interface slotContsInterface {
 	maxSize: number;
 	tweenTime: number;
 	sizeOffset: number;
+	currectlySelected: slotProps | undefined;
 }
 
 export interface slotProps {
-	key: number;
 	isSelected: boolean;
 }
 
@@ -24,4 +24,5 @@ export const slotConsts: slotContsInterface = {
 	minSize: 100,
 	tweenTime: 0.5,
 	sizeOffset: 30,
+	currectlySelected: undefined,
 };

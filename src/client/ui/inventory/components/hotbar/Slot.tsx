@@ -3,7 +3,7 @@ import { slotConsts, slotProps } from "client/data/components/SlotProps";
 import assets from "shared/assets";
 import Icon from "./Icon";
 
-const Slot = ({ key, isSelected }: slotProps) => {
+const Slot = ({ isSelected }: slotProps) => {
 	const innerFrameRef = useRef<Frame>();
 	const currentTween = useRef<Tween>();
 
@@ -12,11 +12,15 @@ const Slot = ({ key, isSelected }: slotProps) => {
 		if (!innerFrame) return;
 
 		currentTween.current?.Cancel();
+
+		// Původní velikosti
 		const targetSize = isSelected
 			? slotConsts.maxSize + slotConsts.sizeOffset
 			: slotConsts.minSize + slotConsts.sizeOffset;
+
 		const tweenService = game.GetService("TweenService");
 		const tweenInfo = new TweenInfo(slotConsts.tweenTime, Enum.EasingStyle.Quad, Enum.EasingDirection.Out);
+
 		const tween = tweenService.Create(innerFrame, tweenInfo, {
 			Size: new UDim2(0, targetSize, 0, targetSize),
 		});
@@ -25,13 +29,16 @@ const Slot = ({ key, isSelected }: slotProps) => {
 		tween.Play();
 
 		return () => {
-			tween.Cancel();
+			if (tween.PlaybackState !== Enum.PlaybackState.Completed) {
+				tween.Cancel();
+			}
 		};
 	}, [isSelected]);
 
 	return (
-		<frame Transparency={1} Size={new UDim2(0, slotConsts.maxSize, 0, slotConsts.maxSize)}>
+		<frame BackgroundTransparency={1} Size={new UDim2(0, slotConsts.maxSize, 0, slotConsts.maxSize)}>
 			<frame
+				ref={innerFrameRef}
 				Size={
 					new UDim2(
 						0,
@@ -46,7 +53,8 @@ const Slot = ({ key, isSelected }: slotProps) => {
 			>
 				{slotConsts.basePositions.map((position, index) => (
 					<imagelabel
-						Image={assets["UI/SlotPart.svg"]}
+						key={`corner_${index}`}
+						Image={assets["UI/SlotPart.svg"] as string}
 						Size={new UDim2(0, slotConsts.cornerSize, 0, slotConsts.cornerSize)}
 						Position={position}
 						BackgroundTransparency={1}
@@ -54,7 +62,7 @@ const Slot = ({ key, isSelected }: slotProps) => {
 						ImageColor3={new Color3(229, 229, 229)}
 					/>
 				))}
-				<Icon Image={""} />
+				<Icon Image={assets["UI/SlotPart.svg"] as string} />
 			</frame>
 		</frame>
 	);

@@ -4,7 +4,7 @@ import Signal from "@rbxts/signal";
 export class InputHandle {
 	public KeyEPressed = new Signal<() => void>();
 	public LeftMouseButtonPressed = new Signal<() => void>();
-	public numberRowPressed = new Signal<(index: number) => void>();
+	public numberRowPressed = new Signal<(numberPressed: number) => void>();
 
 	constructor() {
 		this.ListenForInput();

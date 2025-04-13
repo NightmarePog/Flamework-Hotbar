@@ -1,6 +1,9 @@
+import { slotProps } from "./SlotProps";
+
 export interface HotbarConsts {
-	slots?: JSX.Element[];
 	slotCountArray: number[];
+	selectedSlot: undefined | number;
+	UseRefs: React.MutableRefObject<boolean>[] | undefined;
 }
 
 export interface HotbarProps {
