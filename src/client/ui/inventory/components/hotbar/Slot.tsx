@@ -3,7 +3,11 @@ import { slotConsts, slotProps } from "client/data/components/SlotProps";
 import assets from "shared/assets";
 import Icon from "./Icon";
 
-const Slot = ({ isSelected }: slotProps) => {
+interface ExtendedSlotProps extends slotProps {
+	iconImage: string;
+}
+
+const Slot = ({ isSelected, iconImage }: ExtendedSlotProps) => {
 	const innerFrameRef = useRef<Frame>();
 	const currentTween = useRef<Tween>();
 
@@ -13,7 +17,6 @@ const Slot = ({ isSelected }: slotProps) => {
 
 		currentTween.current?.Cancel();
 
-		// Původní velikosti
 		const targetSize = isSelected
 			? slotConsts.maxSize + slotConsts.sizeOffset
 			: slotConsts.minSize + slotConsts.sizeOffset;
@@ -62,7 +65,7 @@ const Slot = ({ isSelected }: slotProps) => {
 						ImageColor3={new Color3(229, 229, 229)}
 					/>
 				))}
-				<Icon Image={assets["UI/SlotPart.svg"] as string} />
+				<Icon Image={iconImage} />
 			</frame>
 		</frame>
 	);

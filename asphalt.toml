@@ -3,8 +3,8 @@ exclude_assets = []
 write_dir = "src/shared"
 
 [creator]
-type = "group"
-id = 5382451
+type = "user"
+id = 178849946
 
 [inputs.assets]
 path = "assets/**/*"

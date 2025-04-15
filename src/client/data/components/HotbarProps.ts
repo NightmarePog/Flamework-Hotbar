@@ -1,4 +1,4 @@
-import { slotProps } from "./SlotProps";
+import Signal from "@rbxts/signal";
 
 export interface HotbarConsts {
 	slotCountArray: number[];
@@ -8,4 +8,12 @@ export interface HotbarConsts {
 
 export interface HotbarProps {
 	slotCount: number;
+	Images: (undefined | string)[] | undefined;
+	OnChange: Signal<() => void>;
 }
+
+export const HotbarData: HotbarProps = {
+	slotCount: 5,
+	Images: [],
+	OnChange: new Signal(),
+};

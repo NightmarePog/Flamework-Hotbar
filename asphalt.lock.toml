@@ -1,3 +1,21 @@
 version = 1
 
-[inputs]
+[inputs.assets."assets/SlotPart.png"]
+hash = "876bee78b5a9cdc8365a80df816f2164a50153f3704cd9d626d11e683bc01be9"
+asset_id = 75754831525207
+
+[inputs.assets."assets/UI/Items/Unknown/Unknown1.png"]
+hash = "052538bc49e324896d66f90d844ed764d988468da3410c326c2e2a54ab20e428"
+asset_id = 100938671979269
+
+[inputs.assets."assets/UI/Items/Unknown/Unknown2.png"]
+hash = "9877929d199d2a8b93ef9a2efe48a634a839d7354d89c99881afb8ff39c03ece"
+asset_id = 90719884265881
+
+[inputs.assets."assets/UI/Items/Unknown/Unknown3.png"]
+hash = "a80a89b4a345c5dbab44a44c85dc61c70b154f571294038b376cd2e900d92523"
+asset_id = 116304263157620
+
+[inputs.assets."assets/UI/SlotPart.svg"]
+hash = "f35ee71b2d02eb0e0d1f2464ec51db9ffdbc4926d7e7ac985f69930e0e003420"
+asset_id = 121194366465485

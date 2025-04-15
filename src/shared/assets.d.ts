@@ -1,5 +1,9 @@
 declare const assets: {
-	"SlotPart.png": "rbxassetid://94212243947466";
-	"UI/SlotPart.svg": "rbxassetid://84344940381586";
-};
-export = assets;
+	"SlotPart.png": string
+	"UI/Items/Unknown/Unknown1.png": string
+	"UI/Items/Unknown/Unknown2.png": string
+	"UI/Items/Unknown/Unknown3.png": string
+	"UI/SlotPart.svg": string
+}
+
+export = assets

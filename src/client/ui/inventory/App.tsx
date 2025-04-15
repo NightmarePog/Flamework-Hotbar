@@ -16,7 +16,7 @@ export function App() {
 	return (
 		<>
 			<frame Transparency={1} Size={new UDim2(1, 0, 1, 0)}>
-				<Hotbar slotCount={props.slotCount} />
+				<Hotbar />
 			</frame>
 			<frame Transparency={1} Size={new UDim2(1, 0, 1, 0)}>
 				<PickupDot />
