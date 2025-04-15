@@ -1,15 +1,10 @@
 import Signal from "@rbxts/signal";
 
-export interface HotbarConsts {
-	slotCountArray: number[];
-	selectedSlot: undefined | number;
-	UseRefs: React.MutableRefObject<boolean>[] | undefined;
-}
-
 export interface HotbarProps {
 	slotCount: number;
 	Images: (undefined | string)[] | undefined;
 	OnChange: Signal<() => void>;
+	SelectedSlot?: undefined | number;
 }
 
 export const HotbarData: HotbarProps = {

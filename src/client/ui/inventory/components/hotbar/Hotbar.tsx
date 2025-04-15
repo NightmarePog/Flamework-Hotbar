@@ -14,16 +14,14 @@ const Hotbar = () => {
 	useEffect(() => {
 		print("Hotbar mounted. Initial images:", images);
 
-		// Input pro výběr slotu
 		const numberConnection = inputHandler.numberRowPressed.Connect((pressedNumber) => {
 			const newIndex = math.clamp(pressedNumber, 0, slotCount - 1);
 			if (newIndex !== selectedIndex) {
+				HotbarData.SelectedSlot = newIndex;
 				setSelectedIndex(newIndex);
 				print(`Changed selected index to: ${newIndex}`);
 			}
 		});
-
-		// Reakce na změnu HotbarData.Images
 		const imageConnection = HotbarData.OnChange.Connect(() => {
 			print("what the sigma");
 			const newImages = HotbarData.Images ?? [];

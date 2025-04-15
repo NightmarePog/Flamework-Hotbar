@@ -3,7 +3,7 @@ import assets = require("shared/assets");
 const enabled = false;
 
 if (enabled) {
-	print("Inventory testing is running!");
+	print("Inventory testi is running!");
 	delay(2, () => {
 		print("Setting up Images...");
 		HotbarData.Images = [
