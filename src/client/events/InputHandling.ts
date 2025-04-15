@@ -1,7 +1,7 @@
 import { UserInputService } from "@rbxts/services";
 import Signal from "@rbxts/signal";
 
-export class InputHandle {
+export class InputHandler {
 	public KeyEPressed = new Signal<() => void>();
 	public LeftMouseButtonPressed = new Signal<() => void>();
 	public numberRowPressed = new Signal<(numberPressed: number) => void>();

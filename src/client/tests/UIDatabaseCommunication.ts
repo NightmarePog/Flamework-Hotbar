@@ -1,5 +1,5 @@
 import { HotbarData } from "../data/components/HotbarProps";
-import assets = require("shared/assets");
+import assets = require("shared/assets/assets");
 const enabled = false;
 
 if (enabled) {

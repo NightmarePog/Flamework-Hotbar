@@ -1,13 +1,13 @@
 import array from "shared/misc/array";
 import { HotbarData } from "client/data/components/HotbarProps";
-import { InputHandle } from "client/events/InputHandling";
+import { InputHandler } from "client/events/InputHandling";
 import Slot from "./Slot";
 import React, { useEffect, useState } from "@rbxts/react";
 
 const Hotbar = () => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const [images, setImages] = useState(HotbarData.Images ?? []);
-	const inputHandler = new InputHandle();
+	const inputHandler = new InputHandler();
 
 	const slotCount = HotbarData.slotCount;
 

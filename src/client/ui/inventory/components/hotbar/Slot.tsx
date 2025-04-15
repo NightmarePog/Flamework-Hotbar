@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "@rbxts/react";
 import { slotConsts, slotProps } from "client/data/components/SlotProps";
-import assets from "shared/assets";
+import assets from "shared/assets/assets";
 import Icon from "./Icon";
 
 interface ExtendedSlotProps extends slotProps {

@@ -1,5 +1,5 @@
 import { UIState } from "client/events/uiLocalState";
-import assets from "shared/assets";
+import assets from "shared/assets/assets";
 
 const enabled = false;
 

@@ -1,6 +1,6 @@
 asset_dir = "assets"
 exclude_assets = []
-write_dir = "src/shared"
+write_dir = "src/shared/assets"
 
 [creator]
 type = "user"
@@ -8,7 +8,7 @@ id = 178849946
 
 [inputs.assets]
 path = "assets/**/*"
-output_path = "src/shared"
+output_path = "src/shared/assets"
 
 [codegen]
 output_name = "assets"
