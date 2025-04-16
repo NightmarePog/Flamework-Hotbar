@@ -7,7 +7,7 @@ Players.PlayerAdded.Connect((addedPlayer: Player) => {
 	const playerID = addedPlayer.UserId;
 	const newInventory = new Inventory(5);
 	inventories.set(playerID, newInventory);
-	print("Player joined, inventory assinged.");
+	print("Player joined, inventory assigned.");
 });
 
 Players.PlayerRemoving.Connect((removedPlayer: Player) => {

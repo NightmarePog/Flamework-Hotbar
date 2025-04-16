@@ -1,10 +1,9 @@
-import Images from "shared/assets/Items/placeholderItem";
-
 export interface ItemData {
 	ID: number | undefined;
 	Name: string | undefined;
 	Description: string | undefined;
 	Icons: string[] | [];
+	Model: Instance | undefined;
 }
 
 export abstract class Item {
@@ -12,12 +11,14 @@ export abstract class Item {
 	readonly Name: string;
 	readonly Description: string;
 	readonly Icons: string[];
+	readonly Model: Instance;
 
-	constructor(id: number, name: string, description: string, Icons: string[]) {
+	constructor(id: number, name: string, description: string, Icons: string[], Model: Instance) {
 		this.ID = id;
 		this.Name = name;
 		this.Description = description;
 		this.Icons = Icons;
+		this.Model = Model;
 	}
 
 	public abstract use(): void;
@@ -28,6 +29,7 @@ export abstract class Item {
 			Name: this.Name,
 			Description: this.Description,
 			Icons: this.Icons,
+			Model: this.Model,
 		};
 		return data;
 	}

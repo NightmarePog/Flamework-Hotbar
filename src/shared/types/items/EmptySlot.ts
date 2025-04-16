@@ -7,6 +7,7 @@ export class Emptyslot {
 			Name: undefined,
 			Description: undefined,
 			Icons: [],
+			Model: undefined,
 		};
 		return data;
 	}

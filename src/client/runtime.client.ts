@@ -5,5 +5,6 @@ Flamework.addPaths("src/client/ui");
 Flamework.addPaths("src/client/services");
 Flamework.addPaths("src/shared/components");
 Flamework.addPaths("src/client/tests");
+Flamework.addPaths("src/client/logic");
 
 Flamework.ignite();

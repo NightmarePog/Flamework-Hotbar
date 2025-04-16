@@ -1,4 +1,3 @@
-import { number } from "@rbxts/react/src/prop-types";
 import { HotbarData } from "client/data/components/HotbarProps";
 
 export class UIState {

@@ -26,7 +26,8 @@ export function PickupDot() {
 			const instanceModel = hitInstance.Parent;
 
 			if (instanceModel && instanceModel.IsA("Model")) {
-				if (instanceModel.GetAttribute("Item") === true) {
+				const attribute = instanceModel.GetAttribute("ItemID");
+				if (attribute !== undefined) {
 					tweenFrameSize(new UDim2(0, 15, 0, 15));
 				} else {
 					tweenFrameSize(new UDim2(0, 5, 0, 5));

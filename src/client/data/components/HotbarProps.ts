@@ -4,11 +4,12 @@ export interface HotbarProps {
 	slotCount: number;
 	Images: (undefined | string)[] | undefined;
 	OnChange: Signal<() => void>;
-	SelectedSlot?: undefined | number;
+	SelectedSlot: number;
 }
 
 export const HotbarData: HotbarProps = {
 	slotCount: 5,
 	Images: [],
 	OnChange: new Signal(),
+	SelectedSlot: 1,
 };
