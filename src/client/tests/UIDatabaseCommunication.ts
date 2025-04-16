@@ -19,9 +19,9 @@ if (enabled) {
 
 		HotbarData.Images = [
 			assets["UI/Items/Unknown/Unknown2.png"],
-			undefined,
+			"0",
 			assets["UI/Items/Unknown/Unknown2.png"],
-			undefined,
+			"0",
 			assets["UI/Items/Unknown/Unknown2.png"],
 		];
 		HotbarData.OnChange.Fire();
@@ -30,7 +30,7 @@ if (enabled) {
 
 		HotbarData.Images = [
 			assets["UI/Items/Unknown/Unknown2.png"],
-			undefined,
+			"0",
 			assets["UI/Items/Unknown/Unknown2.png"],
 			assets["SlotPart.png"],
 			assets["UI/Items/Unknown/Unknown2.png"],

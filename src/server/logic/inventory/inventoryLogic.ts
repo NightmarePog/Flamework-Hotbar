@@ -1,6 +1,6 @@
 import { Inventory } from "./inventoryDatabase";
 import { Players } from "@rbxts/services";
-
+// TODO WRONG ID ASSINGING SLOTS!!!
 const inventories = new Map<number, Inventory>();
 
 Players.PlayerAdded.Connect((addedPlayer: Player) => {

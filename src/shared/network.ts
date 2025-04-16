@@ -7,7 +7,7 @@ interface ClientToServerEvents {}
 interface ServerToClientEvents {}
 
 interface ClientToServerFunctions {
-	pickUp: (slot: number, itemClass: new () => Item) => boolean; // tries to pickup item, if suceess => True
+	pickUp: (slot: number, itemID: number) => boolean; // tries to pickup item, if suceess => True
 	dropItem: (slot: number) => boolean; // tries to drop item, if success => True
 	useItem: (slot: number) => boolean; // tries to useItem, if success => True
 	getItemsInfo: () => ItemData[]; // gets information about players inventory

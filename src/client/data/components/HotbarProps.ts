@@ -2,7 +2,7 @@ import Signal from "@rbxts/signal";
 
 export interface HotbarProps {
 	slotCount: number;
-	Images: (undefined | string)[] | undefined;
+	Images: string[];
 	OnChange: Signal<() => void>;
 	SelectedSlot: number;
 }

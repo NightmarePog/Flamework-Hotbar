@@ -2,8 +2,8 @@ import { InputHandler } from "client/events/InputHandling";
 import { RaycastHandler } from "client/events/itemRaycast";
 import { UIState } from "client/events/uiLocalState";
 import { Functions } from "client/network";
-import { Item, ItemData } from "shared/types/items/Item";
-import { getItemRegistry } from "shared/types/items/itemsRegistry";
+import Icon from "client/ui/inventory/components/hotbar/Icon";
+import { ItemData } from "shared/types/items/Item";
 
 class InventoryHandler {
 	private InputHandle;
@@ -48,32 +48,28 @@ class InventoryHandler {
 	}
 
 	private pickItem(item: Instance | undefined) {
-		print("ppick up hell yea");
 		if (item !== undefined) {
-			print("item defined");
 			const selectedSlot: number | undefined = this.UIstateHandle.getSelectedSlot();
 			if (selectedSlot !== undefined) {
-				print("slot defined");
 				const itemID: number | undefined = item.GetAttribute("ItemID") as number;
 				if (itemID !== undefined) {
-					print("itemID defined");
-					const itemClass = getItemRegistry(itemID);
-					if (itemClass !== undefined) {
-						print("itemClass defined");
-						Functions.pickUp.invoke(selectedSlot, itemClass).then((success) => {
-							print("no more go 3:");
-							if (success) {
-								print("sucess? ", success);
-								Functions.getItemsInfo.invoke().then((itemData: ItemData[]) => {
-									print("meow");
-									itemData.forEach((SlotData, _) => {
-										const Icon = SlotData.Icons[0];
-										this.UIstateHandle.setItemsInfo(Icon, undefined);
-									});
+					Functions.pickUp.invoke(selectedSlot, itemID).then((success) => {
+						if (success) {
+							print("sucess? ", success);
+							Functions.getItemsInfo.invoke().then((itemData: ItemData[]) => {
+								print("BLEH!");
+								itemData.forEach((SlotData, index) => {
+									const Icon = SlotData.Icons[1];
+									print("-------------------INVENTORY HANDLER START--------------");
+									print("itemdata is:", itemData);
+									print("Icon is: ", Icon);
+									print("slot data is:", SlotData);
+									print("-------------------INVENTORY HANDLER END--------------");
+									this.UIstateHandle.setOneSlot(Icon, index);
 								});
-							}
-						});
-					}
+							});
+						}
+					});
 				}
 			}
 		}
