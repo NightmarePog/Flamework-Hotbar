@@ -1,5 +1,12 @@
 import Images from "shared/assets/Items/placeholderItem";
 
+export interface ItemData {
+	ID: number | undefined;
+	Name: string | undefined;
+	Description: string | undefined;
+	Icons: string[] | [];
+}
+
 export abstract class Item {
 	readonly ID: number;
 	readonly Name: string;
@@ -14,4 +21,14 @@ export abstract class Item {
 	}
 
 	public abstract use(): void;
+
+	public getInfo(): ItemData {
+		const data: ItemData = {
+			ID: this.ID,
+			Name: this.Name,
+			Description: this.Description,
+			Icons: this.Icons,
+		};
+		return data;
+	}
 }

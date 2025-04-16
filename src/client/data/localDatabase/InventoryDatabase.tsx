@@ -1,1 +1,1 @@
-interface ItemData {}
+export const Data = {};

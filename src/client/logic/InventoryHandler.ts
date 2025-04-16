@@ -2,6 +2,8 @@ import { number } from "@rbxts/react/src/prop-types";
 import { InputHandler } from "client/events/InputHandling";
 import { RaycastHandler } from "client/events/itemRaycast";
 import { UIState } from "client/events/uiLocalState";
+import { Functions } from "@flamework/networking/out/functions/types";
+import { Functions } from "client/network";
 
 class InventoryHandler {
 	private InputHandle;
@@ -24,6 +26,7 @@ class InventoryHandler {
 	private DropOrEquipPressed(): undefined {
 		const SelectedSlot = this.UIstateHandle.getSelectedSlot();
 		if (SelectedSlot !== undefined) {
+			Functions.
 		}
 	}
 
