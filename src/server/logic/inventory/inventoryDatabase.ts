@@ -12,29 +12,36 @@ export class Inventory {
 
 	private initialize(slotCount: number) {
 		this.slotCount = slotCount;
-		print("slot count: ", slotCount);
 		array(this.slotCount).forEach((index) => {
-			print("meow :3");
 			this.slotItems[index] = new Emptyslot();
-			print("empty?", new Emptyslot());
-			print("unfinished loll: ", this.slotItems);
 		});
-		print("generated inv looks like this: ", this.slotItems);
 	}
 
 	public pickItem(slot: number, ItemClass: new () => Item) {
 		if (this.isValidSlot(slot)) {
-			print(this.slotItems);
 			this.slotItems[slot] = new ItemClass();
-			print("pickitem", this.slotItems);
 			return true;
 		}
 		return false;
 	}
 
-	public dropItem(slot: number) {
+	public dropItem(slot: number, player: Player) {
 		if (this.isValidSlot(slot)) {
-			this.slotItems[slot] = new Emptyslot();
+			const ClonedItem = this.slotItems[slot].Model?.Clone() as Model;
+			if (ClonedItem !== undefined) {
+				ClonedItem.Parent = game.Workspace;
+				const humanoidRootPart = player.Character?.FindFirstChild("HumanoidRootPart") as BasePart | undefined;
+
+				if (humanoidRootPart) {
+					const forwardOffset = 10;
+					const dropPosition = humanoidRootPart.Position.add(
+						humanoidRootPart.CFrame.LookVector.mul(forwardOffset),
+					);
+					ClonedItem.MoveTo(dropPosition);
+				}
+				this.slotItems[slot] = new Emptyslot();
+			}
+
 			return true;
 		}
 		return false;

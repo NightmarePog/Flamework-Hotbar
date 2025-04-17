@@ -24,21 +24,26 @@ export class UIState {
 	}
 
 	public setOneSlot(image: string, slot: number) {
+		print(HotbarData.Images);
+		print("START");
+		print();
 		const returnValue: string[] = [];
 		if (slot <= HotbarData.slotCount) {
 			for (let index = 0; index < slot; index++) {
-				print(index);
 				returnValue.push(this.getSlotFromParameter(index));
-				print(this.getSlotFromParameter(index));
+				print("before!");
 			}
 			returnValue.push(image);
 			for (let index = slot + 1; index < HotbarData.slotCount; index++) {
 				returnValue.push(this.getSlotFromParameter(index));
-				print("this is second paramater and on the last test should end with 4", index);
+				print("after!");
 			}
 			HotbarData.Images = returnValue;
-			print("returning u this: ", returnValue);
+			print(returnValue);
 			HotbarData.OnChange.Fire();
 		}
+		print();
+		print("END");
+		print();
 	}
 }

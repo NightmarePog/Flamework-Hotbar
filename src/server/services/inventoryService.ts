@@ -4,12 +4,13 @@ import { getInventoryFromID } from "server/logic/inventory/inventoryLogic";
 import { Inventory } from "server/logic/inventory/inventoryDatabase";
 import { getItemRegistry } from "shared/types/items/itemsRegistry";
 
-Functions.pickUp.setCallback((requestingPlayer, slot, itemID: number): boolean => {
+Functions.pickUp.setCallback((requestingPlayer, slot, itemID: number, instance: Instance): boolean => {
 	const itemClass = getItemRegistry(itemID);
 	if (itemClass !== undefined) {
 		const playerID: number = requestingPlayer.UserId;
 		const playerInventory: Inventory | undefined = getInventoryFromID(playerID);
 		if (playerInventory) {
+			instance.Destroy();
 			playerInventory.pickItem(slot, itemClass);
 			return true;
 		}
@@ -21,7 +22,7 @@ Functions.dropItem.setCallback((requestingPlayer, slot): boolean => {
 	const playerID: number = requestingPlayer.UserId;
 	const playerInventory: Inventory | undefined = getInventoryFromID(playerID);
 	if (playerInventory) {
-		return playerInventory.dropItem(slot);
+		return playerInventory.dropItem(slot, requestingPlayer);
 	}
 	return false;
 });
@@ -39,7 +40,6 @@ Functions.getItemsInfo.setCallback((requestingPlayer): ItemData[] => {
 	const playerID: number = requestingPlayer.UserId;
 	const playerInventory: Inventory | undefined = getInventoryFromID(playerID);
 	if (playerInventory) {
-		print(playerInventory.getSlotItems());
 		return playerInventory.getSlotItems();
 	}
 	return [];
