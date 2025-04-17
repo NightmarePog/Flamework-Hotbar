@@ -36,7 +36,6 @@ const Hotbar = () => {
 
 			{array(slotCount).map((_, index) => {
 				const icon = images[index];
-				print(`Rendering Slot ${index} with image:`, icon);
 				return <Slot key={index} isSelected={index === selectedIndex} iconImage={icon ?? ""} />;
 			})}
 		</frame>

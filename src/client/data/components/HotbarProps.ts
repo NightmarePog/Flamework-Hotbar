@@ -11,5 +11,5 @@ export const HotbarData: HotbarProps = {
 	slotCount: 5,
 	Images: [],
 	OnChange: new Signal(),
-	SelectedSlot: 1,
+	SelectedSlot: 0,
 };

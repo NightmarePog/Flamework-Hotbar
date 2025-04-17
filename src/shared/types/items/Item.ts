@@ -11,9 +11,9 @@ export abstract class Item {
 	readonly Name: string;
 	readonly Description: string;
 	readonly Icons: string[];
-	readonly Model: Instance;
+	readonly Model: Instance | undefined;
 
-	constructor(id: number, name: string, description: string, Icons: string[], Model: Instance) {
+	constructor(id: number, name: string, description: string, Icons: string[], Model: Instance | undefined) {
 		this.ID = id;
 		this.Name = name;
 		this.Description = description;

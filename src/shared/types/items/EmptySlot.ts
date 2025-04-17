@@ -1,12 +1,18 @@
-import { ItemData } from "./Item";
+import { Item, ItemData } from "./Item";
 
-export class Emptyslot {
+export class Emptyslot extends Item {
+	public use(): void {
+		print("none?");
+	}
+	constructor() {
+		super(0, "EmptySlot", "nil", [], undefined);
+	}
 	public getInfo(): ItemData {
 		const data: ItemData = {
-			ID: undefined,
-			Name: undefined,
-			Description: undefined,
-			Icons: [],
+			ID: 0,
+			Name: "0",
+			Description: "",
+			Icons: ["0"],
 			Model: undefined,
 		};
 		return data;

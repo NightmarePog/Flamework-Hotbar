@@ -101,7 +101,6 @@ export class RaycastHandler {
 		});
 	}
 
-	// Nová funkce pro provedení jednoho raycastu
 	public FireSingleRaycast(): RaycastResult | undefined {
 		const mousePos = UserInputService.GetMouseLocation();
 		const ray = this.camera.ViewportPointToRay(mousePos.X, mousePos.Y);

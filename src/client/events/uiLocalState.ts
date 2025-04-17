@@ -13,7 +13,7 @@ export class UIState {
 	}
 
 	private getSlotFromParameter(slot: number): string {
-		return HotbarData.Images[slot];
+		return HotbarData.Images[slot] ?? "0";
 	}
 
 	public setItemsInfo(...args: string[]) {
@@ -27,13 +27,17 @@ export class UIState {
 		const returnValue: string[] = [];
 		if (slot <= HotbarData.slotCount) {
 			for (let index = 0; index < slot; index++) {
+				print(index);
 				returnValue.push(this.getSlotFromParameter(index));
+				print(this.getSlotFromParameter(index));
 			}
 			returnValue.push(image);
-			for (let index = slot; index < HotbarData.slotCount; index++) {
+			for (let index = slot + 1; index < HotbarData.slotCount; index++) {
 				returnValue.push(this.getSlotFromParameter(index));
+				print("this is second paramater and on the last test should end with 4", index);
 			}
 			HotbarData.Images = returnValue;
+			print("returning u this: ", returnValue);
 			HotbarData.OnChange.Fire();
 		}
 	}

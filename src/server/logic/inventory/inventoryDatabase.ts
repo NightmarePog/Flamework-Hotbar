@@ -12,12 +12,21 @@ export class Inventory {
 
 	private initialize(slotCount: number) {
 		this.slotCount = slotCount;
-		array(this.slotCount).forEach(() => this.slotItems.push(new Emptyslot()));
+		print("slot count: ", slotCount);
+		array(this.slotCount).forEach((index) => {
+			print("meow :3");
+			this.slotItems[index] = new Emptyslot();
+			print("empty?", new Emptyslot());
+			print("unfinished loll: ", this.slotItems);
+		});
+		print("generated inv looks like this: ", this.slotItems);
 	}
 
 	public pickItem(slot: number, ItemClass: new () => Item) {
 		if (this.isValidSlot(slot)) {
+			print(this.slotItems);
 			this.slotItems[slot] = new ItemClass();
+			print("pickitem", this.slotItems);
 			return true;
 		}
 		return false;

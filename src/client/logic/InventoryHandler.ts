@@ -2,7 +2,6 @@ import { InputHandler } from "client/events/InputHandling";
 import { RaycastHandler } from "client/events/itemRaycast";
 import { UIState } from "client/events/uiLocalState";
 import { Functions } from "client/network";
-import Icon from "client/ui/inventory/components/hotbar/Icon";
 import { ItemData } from "shared/types/items/Item";
 
 class InventoryHandler {
@@ -28,18 +27,16 @@ class InventoryHandler {
 		if (SelectedSlot !== undefined) {
 			Functions.getItemsInfo.invoke().then((data) => {
 				print("info sent");
-				if (data[SelectedSlot].ID === undefined) {
+				if (data[SelectedSlot].ID === 0) {
 					print("it's empty");
 					const raycastResult = this.RaycastHandle.FireSingleRaycast()?.Instance.Parent as Instance;
 					if (raycastResult !== undefined) {
 						const ResultAttribute = raycastResult?.GetAttribute("ItemID");
-						print("raycast result:", raycastResult?.Name);
-						print("raycastAttribute:", ResultAttribute);
 						if (ResultAttribute !== undefined) {
 							this.pickItem(raycastResult);
 						}
 					}
-				} else if (data[SelectedSlot] !== undefined) {
+				} else if (data[SelectedSlot].ID !== 0) {
 					print("it's not empty");
 					this.dropItem();
 				}
@@ -55,18 +52,18 @@ class InventoryHandler {
 				if (itemID !== undefined) {
 					Functions.pickUp.invoke(selectedSlot, itemID).then((success) => {
 						if (success) {
-							print("sucess? ", success);
 							Functions.getItemsInfo.invoke().then((itemData: ItemData[]) => {
-								print("BLEH!");
+								print("-------------------INVENTORY HANDLER START--------------");
 								itemData.forEach((SlotData, index) => {
 									const Icon = SlotData.Icons[1];
-									print("-------------------INVENTORY HANDLER START--------------");
+									print("--- ", index, "ICON");
 									print("itemdata is:", itemData);
 									print("Icon is: ", Icon);
 									print("slot data is:", SlotData);
-									print("-------------------INVENTORY HANDLER END--------------");
+
 									this.UIstateHandle.setOneSlot(Icon, index);
 								});
+								print("-------------------INVENTORY HANDLER END--------------");
 							});
 						}
 					});
