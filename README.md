@@ -1,6 +1,4 @@
 # Inventory System in Roblox-TS
-
-## Info
 A simple and easily expandable inventory system built with Roblox-TS.
 
 ## To-Do
@@ -17,4 +15,5 @@ A simple and easily expandable inventory system built with Roblox-TS.
 ##  Notes
 - Yes, you might find a key in the commits  
 - No, it doesn’t work — I’m just dumb  
-- This project uses open-source dependencies installed via npm  
+- This project uses open-source dependencies installed via npm
+- This is just a fork as one of the features into upcoming game :3
